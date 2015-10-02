@@ -1,0 +1,15 @@
+name = RETN Moderation Fields
+description = Moderation field base and instances
+core = 7.x
+package = Features
+version = 7.x-1.1
+project = retn_moderation
+features[features_api][] = api:2
+features[field_base][] = field_moderation_content
+features[field_instance][] = node-air_request-field_moderation_content
+features[field_instance][] = node-cm_project-field_moderation_content
+features[field_instance][] = node-cm_show-field_moderation_content
+features[field_instance][] = node-event_coverage_request-field_moderation_content
+features_exclude[dependencies][features] = features
+features_exclude[dependencies][list] = list
+features_exclude[dependencies][options] = options
