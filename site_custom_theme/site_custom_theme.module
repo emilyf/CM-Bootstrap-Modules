@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * Implements hook_custom_theme().
+ * switch theme based on paths and/or user roles.
+ */
+function site_custom_theme_custom_theme() {
+  if (in_array('producer', $GLOBALS['user']->roles)) {
+    // Node add
+    if (arg(0) == 'node' && arg(1) == 'add') {
+      return 'cm_admin';
+    }
+    // Node edit
+    if (arg(0) == 'node' && arg(2) == 'edit') {
+      return 'cm_admin';
+    }
+    // Node delete
+    if (arg(0) == 'node' && arg(2) == 'delete') {
+      return 'cm_admin';
+    }
+    // Node revisions
+    if (arg(0) == 'node' && arg(2) == 'revisions') {
+      return 'cm_admin';
+    }
+    // User Edit
+    if (arg(0) == 'user' && arg(2) == 'edit') {
+      return 'cm_admin';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function site_custom_theme_form_node_form_alter(&$form, &$form_state) {
+  // Hide the field group for unprivileged users.
+  if ($GLOBALS['user']->uid != 1 && !in_array('staff', $GLOBALS['user']->roles)) {
+    // Hide cm_project fieldgroup: "Staff"
+    field_group_hide_field_groups($form, array('group_staffentryproject'));
+    // Hide cm_show fieldgroup: "Staff"
+    field_group_hide_field_groups($form, array('group_staffentry'));
+     // Hide cm_show fieldgroup: "Programming"
+    field_group_hide_field_groups($form, array('group_admin'));
+  }
+}
+
+/**
+ * Implements hook_node_presave($node).
+ * On node save, we post to facebook's open graph so it crawls our page.
+ * This is good for updating content, as well as creating new content.
+ */
+function site_custom_theme_node_presave($node) {
+  $url = $GLOBALS['base_url'] . '/node/' . $node->nid;
+  $fb = new CmFacebookDebugger();
+  $fb->reload($url);
+}
+
+/**
+ * Custom class for posting to Facebook open graph.
+ */
+class CmFacebookDebugger {
+	/*
+	 * https://developers.facebook.com/docs/opengraph/using-objects
+	 *
+	 */
+	public function reload($url) {
+		$graph = 'https://graph.facebook.com/';
+		$post = 'id='.urlencode($url).'&scrape=true';
+		return $this->send_post($graph, $post);
+	}
+	private function send_post($url, $post) {
+		$r = curl_init();
+		curl_setopt($r, CURLOPT_URL, $url);
+		curl_setopt($r, CURLOPT_POST, 1);
+		curl_setopt($r, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($r, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($r, CURLOPT_CONNECTTIMEOUT, 5);
+		$data = curl_exec($r);
+		curl_close($r);
+		return $data;
+	}
+}
