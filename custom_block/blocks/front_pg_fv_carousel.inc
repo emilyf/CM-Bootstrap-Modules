@@ -33,7 +33,13 @@ function _front_pg_featured_videos_carousel_data() {
         }
       }
       else {
-        $cm_show_image = $GLOBALS['base_url'] . '/' . path_to_theme() . '/images/500x281-placeholder.gif';
+        //$cm_show_image = $GLOBALS['base_url'] . '/' . path_to_theme() . '/images/500x281-placeholder.gif';
+        if (module_exists('site_cp_default_images')) {
+          $file = site_cp_default_images_load_image($node->type);
+          //dpm($file);
+          $image_uri = $file->uri;
+          $cm_show_image = image_style_url('500x281', $image_uri);
+        }
       }
       // field_description
       //$allowable_tags = '<i><a>';

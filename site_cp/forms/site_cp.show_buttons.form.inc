@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * crp_cp administration functions.
+ * 
  */
 
 /**
@@ -25,6 +25,7 @@ function site_cp_show_buttons_form($form, &$form_state) {
   $form['show_buttons']['show_buttons_1']['url'] = array(
     '#type' => 'textfield',
     '#title' => t('URL'),
+    '#description' => 'Tokens available: [nid]',
     '#default_value' => site_cp_show_buttons_form_default_value('show_buttons_1', 'url'),
     '#required' => TRUE,
   );
@@ -51,6 +52,7 @@ function site_cp_show_buttons_form($form, &$form_state) {
   $form['show_buttons']['show_buttons_2']['url'] = array(
     '#type' => 'textfield',
     '#title' => t('URL'),
+    '#description' => 'Tokens available: [nid]',
     '#default_value' => site_cp_show_buttons_form_default_value('show_buttons_2', 'url'),
     '#required' => TRUE,
   );

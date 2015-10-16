@@ -43,7 +43,11 @@
                   $img_src = image_style_url('500x281', $image_uri);
                 }
                 else {
-                  $img_src = '';
+                  if (module_exists('site_cp_default_images')) {
+                    $file = site_cp_default_images_load_image($video_item->type);
+                    $image_uri = $file->uri;
+                    $img_src = image_style_url('500x281', $image_uri);
+                  }
                 }
                 //$img_src = image_style_url('500x281', $image_uri)
               ?>          
@@ -101,7 +105,7 @@
                       <?php print $video_item->title; ?>
                      </p>
                       <?php
-                        $allowable_tags = '<i><a>';
+                        $allowable_tags = '<i>';
                         
                         if (isset($video_item->field_description['und'][0]['value'])) {
                           $field_description = strip_tags($video_item->field_description['und'][0]['value'], $allowable_tags);

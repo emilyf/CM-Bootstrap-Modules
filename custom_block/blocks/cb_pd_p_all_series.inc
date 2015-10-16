@@ -23,11 +23,16 @@ function _cb_pd_p_all_series() {
           }
           // Else, no image, use default image.
           else {
-            $info = field_info_field('field_series_image');
+            /*$info = field_info_field('field_series_image');
             if (!empty($info) && $info['settings']['default_image'] > 0) {
               $default_img_fid  = $info['settings']['default_image'];
               $default_img_file = file_load($default_img_fid);
               $image_uri = $default_img_file->uri;
+            }*/
+            if (module_exists('site_cp_default_images')) {
+              $file = site_cp_default_images_load_image($node->type);
+              //dpm($file);
+              $image_uri = $file->uri;
             }
           }          
           // Build items array for use in TPL.

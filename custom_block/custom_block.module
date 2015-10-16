@@ -296,6 +296,10 @@ function custom_block_theme($existing, $type, $theme, $path) {
 		'template' => 'cb-taxonomy-term',
 		'path' => $path . '/templates',
 	);
+	$theme['cb_show_cue_points'] = array(
+		'template' => 'cb-show-cue-points',
+		'path' => $path . '/templates',
+	);
 	return $theme;
 }
 

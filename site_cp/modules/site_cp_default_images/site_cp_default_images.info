@@ -1,0 +1,5 @@
+name = Site Control Panel Default Images
+description = Site Control Panel Default Images
+package = Site Control Panel
+core = 7.x
+dependencies[] = site_cp

@@ -13,7 +13,7 @@ function _front_pg_latest_shows_carousel_data() {
     $query->propertyOrderBy('created', 'DESC');
     
     // Make sure node has an image to display.    
-    $query->fieldCondition('field_show_vod', 'fid', 'NULL', '!=');
+    //$query->fieldCondition('field_show_vod', 'fid', 'NULL', '!=');
   
   $result = $query->execute();
     
@@ -38,6 +38,13 @@ function _front_pg_latest_shows_carousel_data() {
             $image_uri = str_replace('youtube://v/', 'media-youtube/', $node->field_show_vod['und'][0]['uri']);
             $image_uri = $image_uri . '.jpg';
             break;
+        }
+      }
+      else {
+        if (module_exists('site_cp_default_images')) {
+          $file = site_cp_default_images_load_image($node->type);
+          //dpm($file);
+          $image_uri = $file->uri;
         }
       }
           
