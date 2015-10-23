@@ -4,7 +4,7 @@ function _cb_show_chapters() {
   if (arg(0) == 'node' && is_numeric(arg(1))) {
     // Need to check if this field exists / is attached to cm_show nodes,
     // RETN does not use this field.
-    if (field_info_instance('node', 'field_video_chapters', 'cm_show')) {
+    if (db_table_exists('field_data_video_chapters')) {
       $cue_points = FALSE;
       $node = node_load(arg(1)); 
       //dpm($node); 
