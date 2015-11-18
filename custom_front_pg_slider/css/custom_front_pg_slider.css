@@ -88,8 +88,10 @@ ul.slides li span.title {
 
 #block-custom-front-pg-slider-front-pg-slider .flexslider .flex-direction-nav a.flex-prev {
   left: 0px;
+  opacity: 1 !important;
 }
 
 #block-custom-front-pg-slider-front-pg-slider .flexslider .flex-direction-nav a.flex-next {
   right: 0px;
+  opacity: 1 !important;
 }

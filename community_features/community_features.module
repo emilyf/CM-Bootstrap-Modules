@@ -1,6 +1,7 @@
 <?php
 
 module_load_include('inc', 'community_features', 'blocks/cf_user_statistics');
+module_load_include('inc', 'community_features', 'blocks/cf_user_recent_videos');
 
 /**
  * @file
@@ -18,6 +19,11 @@ function community_features_block_info() {
     'cache' => DRUPAL_NO_CACHE,
     'weight' => '0',
   );
+  $blocks['cf_user_recent_videos'] = array(
+    'info' => t('cf_user_recent_videos'),
+    'cache' => DRUPAL_NO_CACHE,
+    'weight' => '0',
+  );
   return $blocks;
 }
 
@@ -29,6 +35,11 @@ function community_features_block_view($delta = '') {
   switch ($delta) {
     case 'cf_user_statistics':
       $block['content'] = _cf_user_statistics();
+      break;
+    case 'cf_user_recent_videos':
+      // Need to do this way to properly return block teasers w/ pager
+      $block = _cf_user_recent_videos();
+      return $block;
       break;
   }
   return $block;
@@ -49,6 +60,10 @@ function community_features_theme($existing, $type, $theme, $path) {
 	);
   $theme['cf_user_statistics'] = array(
 		'template' => 'cf-user-statistics',
+		'path' => $path . '/templates',
+	);
+	$theme['cf_user_recent_videos'] = array(
+		'template' => 'cf-user-recent-videos',
 		'path' => $path . '/templates',
 	);
 	return $theme;
