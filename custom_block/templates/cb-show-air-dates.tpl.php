@@ -8,7 +8,8 @@
           $timestamp = strtotime($item[0]->field_airing_date['und'][0]['value']);
           $date = date('l, F j, Y', $timestamp);
           $hour = (int)date('h', $timestamp);
-          $minute = (int)date('i', $timestamp);
+          //$minute = (int)date('i', $timestamp);
+          $minute = date('i', $timestamp);
           $am_pm = date('a', $timestamp);
         ?>
         <?php //print format_date($timestamp, $type); ?>

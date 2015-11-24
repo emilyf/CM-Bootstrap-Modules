@@ -304,6 +304,28 @@ function custom_block_theme($existing, $type, $theme, $path) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function custom_block_image_default_styles() {
+  $styles = array();
+  $styles['cmb_cb_video_grid'] = array(
+    'label' => 'cmb_cb_video_grid',
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 329, 
+          'height' => 197, 
+          'upscale' => 1,
+        ),
+        'weight' => 0,
+      ),
+    )
+  );
+  return $styles;
+}
+
+/**
  * Implements hook_block_list_alter().
  */
 function custom_block_block_list_alter(&$blocks) {

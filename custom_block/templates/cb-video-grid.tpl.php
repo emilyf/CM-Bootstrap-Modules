@@ -33,14 +33,14 @@
                   $image_uri = $image_uri . '.jpg';
                   break;
               }
-              $img_src = image_style_url('250x150', $image_uri);
+              $img_src = image_style_url('500x281', $image_uri);
             }
             else {
               if (module_exists('site_cp_default_images')) {
                 $file = site_cp_default_images_load_image($show_node->type);
                 //dpm($file);
                 $image_uri = $file->uri;
-                $img_src = image_style_url('250x150', $image_uri);
+                $img_src = image_style_url('500x281', $image_uri);
               }
             }
             
