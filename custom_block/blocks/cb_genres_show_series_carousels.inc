@@ -34,6 +34,13 @@ function _cb_genres_show_series_carousels() {
                 break;
             }
           }
+          else {
+            if (module_exists('site_cp_default_images')) {
+              $file = site_cp_default_images_load_image($node->type);
+              //dpm($file);
+              $image_uri = $file->uri;
+            }
+          }
           // field_description
           $allowable_tags = '';
           if (isset($node->field_description['und'][0]['value'])) {

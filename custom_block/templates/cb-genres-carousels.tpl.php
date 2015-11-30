@@ -32,6 +32,13 @@
                       break;
                   }
                 }
+                else {
+                  if (module_exists('site_cp_default_images')) {
+                    $file = site_cp_default_images_load_image($video_item->type);
+                    //dpm($file);
+                    $image_uri = $file->uri;
+                  }
+                }
               ?>
               <img src="<?php print image_style_url('500x281', $image_uri);?>"/>
               <span class="overlay">

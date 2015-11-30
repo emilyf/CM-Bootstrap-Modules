@@ -11,8 +11,13 @@ function _front_pg_slider_data() {
     ->entityCondition('bundle', 'slider')
     ->propertyCondition('status', 1)
     ->propertyCondition('promote', 1)
-    ->fieldOrderBy('field_slideshow_weight', 'value', 'ASC') 
-    ->range(0, 4);  
+    ->range(0, 4);
+    // Checks if field is attached to content type, skips if not attached.
+    // A fatal exception will be thrown, breaking home pg, if this field is
+    // missing from content type.
+    if (field_info_instance('node', 'field_slideshow_weight', 'slider')) {
+      $query->fieldOrderBy('field_slideshow_weight', 'value', 'ASC'); 
+    }
   $result = $query->execute();
     
   if (isset($result['node'])) {

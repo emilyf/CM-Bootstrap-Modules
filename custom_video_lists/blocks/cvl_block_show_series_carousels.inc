@@ -32,6 +32,13 @@ function _custom_video_lists_block_series_carousels($nid) {
             break;
         }
       }
+      else {
+        if (module_exists('site_cp_default_images')) {
+          $file = site_cp_default_images_load_image($node->type);
+          //dpm($file);
+          $image_uri = $file->uri;
+        }
+      }
       
       $allowable_tags = '';
       

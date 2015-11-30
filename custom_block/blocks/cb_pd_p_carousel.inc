@@ -108,6 +108,13 @@ function _cb_pd_p_carousel() {
             break;
         }
       }
+      else {
+        if (module_exists('site_cp_default_images')) {
+          $file = site_cp_default_images_load_image($show_node->type);
+          //dpm($file);
+          $image_uri = $file->uri;
+        }
+      }
       // field_description
       if (isset($show_node->field_description['und'][0]['value'])) {
         $allowable_tags = '<i><a>';

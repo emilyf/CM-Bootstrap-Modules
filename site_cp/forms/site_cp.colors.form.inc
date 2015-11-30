@@ -76,6 +76,18 @@ function site_cp_colors_form($form, &$form_state) {
     '#size' => 90,
     '#default_value' => site_cp_colors_form_default_value('right_sidebar_link_color'),
   );
+  $form['global_colors']['show_main_content_bg_color'] = array(
+    '#type' => 'spectrum_field',
+    '#title' => t('Show: Main Content Background Color'),
+    '#size' => 90,
+    '#default_value' => site_cp_colors_form_default_value('show_main_content_bg_color'),
+  );
+  $form['global_colors']['series_main_content_bg_color'] = array(
+    '#type' => 'spectrum_field',
+    '#title' => t('Series: Main Content Background Color'),
+    '#size' => 90,
+    '#default_value' => site_cp_colors_form_default_value('series_main_content_bg_color'),
+  );
   // END: Global Colors  
   // START: Primary Colors
   $form['primary_colors'] = array(

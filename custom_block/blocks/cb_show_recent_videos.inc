@@ -30,6 +30,13 @@ function _cb_show_recent_videos() {
             break;
         }
       }
+      else {
+        if (module_exists('site_cp_default_images')) {
+          $file = site_cp_default_images_load_image($node->type);
+          //dpm($file);
+          $image_uri = $file->uri;
+        }
+      }
       // field_description
       if (isset($node->field_description['und'][0]['value'])) {
         $allowable_tags = '<i><a>';

@@ -13,7 +13,16 @@
              <?php print gmdate('H:i:s', $chapter->video_chapters_start); ?>
           <?php endif; ?>
         </span>
+        <div class="chapter-description">
+          <?php echo $chapter->video_chapters_description ?>
+        </div>
       </li>
     <?php endforeach; ?>
   </ol>
 <?php endif; ?>
+
+<?php //$contact_form = module_invoke('custom_contact', 'block_view', 'show_chapters_block'); ?>
+<?php //print render($contact_form['content']); ?>
+
+<?php $chapters_block = module_invoke('views', 'block_view', 'show_chapters-block'); ?>
+<?php print render($chapters_block['content']); ?>

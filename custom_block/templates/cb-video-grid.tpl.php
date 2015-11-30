@@ -36,7 +36,12 @@
               $img_src = image_style_url('250x150', $image_uri);
             }
             else {
-              $img_src = '';
+              if (module_exists('site_cp_default_images')) {
+                $file = site_cp_default_images_load_image($show_node->type);
+                //dpm($file);
+                $image_uri = $file->uri;
+                $img_src = image_style_url('250x150', $image_uri);
+              }
             }
             
             // Description
@@ -55,28 +60,30 @@
             else {
               $series_title = '';
             }
-          ?>    
-          <li>
-            <a href="<?php print url('node/' . $show_node->nid); ?>">
-              <?php //print drupal_render($img_src); ?>
-              
-              <img src="<?php print $img_src; ?>" />
-              <span class="overlay">
-                <!--<span class="play-button">
-                  <i class="icon glyphicon glyphicon-play-circle" aria-hidden="true"></i>
-                </span>-->
-                <p class="title">
-                  <?php print custom_block_truncate($show_node->title, $length = 45, array('html' => false, 'ending' => ' . . .', 'exact' => FALSE)); ?>                  
-                </p>
-                <p class="description">
-                  <?php //print $show_description; ?>
-                </p>
-                <span class="series-title" style="font-style:italic;"><?php print $series_title; ?></span>
-                <span class="watch-now-mobile">Watch Now &raquo;</span>
-              </span>
-  
-            </a>
-          </li>
+          ?>  
+          <?php // Don't show video grid item if no image ?> 
+          <?php if (!empty($img_src)): ?> 
+            <li>
+              <a href="<?php print url('node/' . $show_node->nid); ?>">
+                <?php //print drupal_render($img_src); ?>
+                
+                <img src="<?php print $img_src; ?>" />
+                <span class="overlay">
+                  <!--<span class="play-button">
+                    <i class="icon glyphicon glyphicon-play-circle" aria-hidden="true"></i>
+                  </span>-->
+                  <p class="title">
+                    <?php print custom_block_truncate($show_node->title, $length = 45, array('html' => false, 'ending' => ' . . .', 'exact' => FALSE)); ?>                  
+                  </p>
+                  <p class="description">
+                    <?php //print $show_description; ?>
+                  </p>
+                  <span class="series-title" style="font-style:italic;"><?php print $series_title; ?></span>
+                  <span class="watch-now-mobile">Watch Now &raquo;</span>
+                </span>
+              </a>
+            </li>
+          <?php endif; ?>
           
           
         <?php endforeach; ?>

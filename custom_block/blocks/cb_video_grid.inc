@@ -16,9 +16,17 @@ function _cb_video_grid() {
         foreach($vg_node->field_column_1_shows['und'] as $show) {
           $shows[] = node_load($show['target_id']);
         }
+        
+        if (isset($vg_node->field_column_1_description['und'][0]['value'])) {
+          $description = $vg_node->field_column_1_description['und'][0]['value'];
+        }
+        else {
+          $description = '';
+        }
+        
         $items[$vg_node->nid] = array(
           'title' => $vg_node->title,
-          'description' => $vg_node->field_column_1_description['und'][0]['value'],
+          'description' => $description,
           'shows' => $shows,
         ); 
       }
