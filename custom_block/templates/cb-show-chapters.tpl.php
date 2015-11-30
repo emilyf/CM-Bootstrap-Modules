@@ -13,6 +13,9 @@
              <?php print gmdate('H:i:s', $chapter->video_chapters_start); ?>
           <?php endif; ?>
         </span>
+        <div class="chapter-description">
+          <?php echo $chapter->video_chapters_description ?>
+        </div>
       </li>
     <?php endforeach; ?>
   </ol>
